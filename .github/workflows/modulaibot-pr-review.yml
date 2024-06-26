@@ -1,0 +1,29 @@
+
+name: Organization-wide PR Review Requested Listener
+
+on:
+  pull_request:
+    types: [review_requested]
+
+jobs:
+  echo_repo_info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Repository Information
+        env:
+          REPO_NAME: ${{ github.repository }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          REVIEWER: ${{ toJson(github.event.requested_reviewer) }}
+        run: |
+          echo "A review was requested for a PR in the organization!"
+          echo "Repository: $REPO_NAME"
+          echo "PR URL: $PR_URL"
+          echo "PR Title: $PR_TITLE"
+          echo "Requested Reviewer: $REVIEWER"
+          echo "Repository Description: ${{ github.event.repository.description }}"
+          echo "Repository Default Branch: ${{ github.event.repository.default_branch }}"
+          echo "Repository Created At: ${{ github.event.repository.created_at }}"
+          echo "Repository Updated At: ${{ github.event.repository.updated_at }}"
+          echo "Repository Language: ${{ github.event.repository.language }}"
+          echo "Repository Topics: ${{ toJson(github.event.repository.topics) }}"
