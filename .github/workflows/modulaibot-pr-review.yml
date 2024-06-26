@@ -1,4 +1,4 @@
-
+# Doesn't seem to be possible to listen to other repos as of today. So this doesn't work
 name: Organization-wide PR Review Requested Listener
 
 on:
